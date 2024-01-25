@@ -23,6 +23,11 @@ public class RobotMap {
     public final static int SHOOTER_MOTOR_ID = 0;
     public final static int HANG_MOTOR_ID = 0;
 
+
+    // motor Inversion Constants
+    public final static boolean INTAKE_INVERTED = true;
+    public final static boolean SHOOTER_INVERTED = true;
+
    
 
 
