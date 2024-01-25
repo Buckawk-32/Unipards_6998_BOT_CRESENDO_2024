@@ -3,7 +3,7 @@ package frc.robot;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
-import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -29,7 +29,7 @@ public class SwerveModule{
     private final DutyCycleOut DRIVE_DUTY_CYCLE = new DutyCycleOut(0);
     private final VelocityVoltage DRIVE_VELOCITY_VOLTAGE = new VelocityVoltage(0);
 
-    private final PositionVoltage ANGLE_POSITION = new PositionVoltage(0);
+    private final PositionDutyCycle ANGLE_POSITION = new PositionDutyCycle(0);
 
     private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Swerve_Motion_Constants.SWERVE_DRIVE_MOTOR_CONSTANTS.SWERVE_DRIVE_KS, Swerve_Motion_Constants.SWERVE_DRIVE_MOTOR_CONSTANTS.SWERVE_DRIVE_KV, Swerve_Motion_Constants.SWERVE_DRIVE_MOTOR_CONSTANTS.SWERVE_DRIVE_KA);
 
@@ -71,7 +71,7 @@ public class SwerveModule{
     }
 
     private void setAngle(SwerveModuleState DESIRED_STATE) {
-        ANGLE_MOTOR.setControl(ANGLE_POSITION.withPosition(DESIRED_STATE.angle.getDegrees()));
+        ANGLE_MOTOR.setControl(ANGLE_POSITION.withPosition(DESIRED_STATE.angle.getDegrees()).withSlot(0));
     }
 
     public SwerveModulePosition getPosition() {
