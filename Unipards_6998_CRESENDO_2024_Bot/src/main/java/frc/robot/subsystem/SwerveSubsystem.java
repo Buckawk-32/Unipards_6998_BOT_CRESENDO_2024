@@ -12,7 +12,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     private SwerveSubsystem() {
-        SwerveModuleState.optimize()
+
     }
 }
 
