@@ -22,8 +22,8 @@ public class Constants {
 
 
     public final static double[] CHASSIS_PID = {0,0,0,0};
-    public final static double[] INTAKE_PID = {0,0,0,0};
-    public final static double[] SHOOTER_PID = {0,0,0,0};
+    public final static double[] INTAKE_PID = {0.0005,0,0,0};
+    public final static double[] SHOOTER_PID = {0.0008,0,0,0};
 
    
 
