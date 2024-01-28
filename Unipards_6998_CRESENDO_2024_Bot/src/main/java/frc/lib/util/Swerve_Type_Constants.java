@@ -73,6 +73,6 @@ public class Swerve_Type_Constants {
     }
 
     @SuppressWarnings("Removal")
-    private static final double SWERVE_MK4I_ANGLE_GEAR_RATIO = ((150.0 / 7.0) / 1.0);
-    private static final double SWERVE_MK4I_DRIVE_GEAR_RATIO_L1 = (8.14 / 1.0);
+    private static final double SWERVE_MK4I_ANGLE_GEAR_RATIO = 150.0/7.0;
+    private static final double SWERVE_MK4I_DRIVE_GEAR_RATIO_L1 = 8.14;
 }
