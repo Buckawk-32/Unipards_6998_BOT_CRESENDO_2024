@@ -1,5 +1,6 @@
-package frc.robot.All_Constants;
+package frc.robot.All_Constants.Swerve;
 
+import com.ctre.phoenix6.signals.InvertedValue;
 import edu.wpi.first.math.util.Units;
 
 public class Swerve_Type_Constants {
@@ -12,9 +13,9 @@ public class Swerve_Type_Constants {
     public double ANGLE_KI;
     public double ANGLE_KD;
     public double ANGLE_KF;
-    public boolean DRIVE_MOTOR_INVERT;
-    public boolean ANGLE_MOTOR_INVERT;
-    public boolean CANCODER_INVERT;
+    public InvertedValue DRIVE_MOTOR_INVERT;
+    public InvertedValue ANGLE_MOTOR_INVERT;
+    public InvertedValue CANCODER_INVERT;
 
 
     public Swerve_Type_Constants(
@@ -25,9 +26,9 @@ public class Swerve_Type_Constants {
             double ANGLE_KI,
             double ANGLE_KD,
             double ANGLE_KF,
-            boolean DRIVE_MOTOR_INVERT,
-            boolean ANGLE_MOTOR_INVERT,
-            boolean CANCODER_INVERT
+            InvertedValue DRIVE_MOTOR_INVERT,
+            InvertedValue ANGLE_MOTOR_INVERT,
+            InvertedValue CANCODER_INVERT
     ) {
         this.WHEEL_DIAMETER = WHEEL_DIAMETER;
         this.WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI;
@@ -54,9 +55,9 @@ public class Swerve_Type_Constants {
         double ANGLE_KD = 0.0;
         double ANGLE_KF = 0.0;
 
-        boolean DRIVE_MOTOR_INVERT = false;
-        boolean ANGLE_MOTOR_INVERT = true;
-        boolean CANCODER_MOTOR_INVERT = false;
+        InvertedValue DRIVE_MOTOR_INVERT = InvertedValue.Clockwise_Positive;
+        InvertedValue ANGLE_MOTOR_INVERT = InvertedValue.CounterClockwise_Positive;
+        InvertedValue CANCODER_MOTOR_INVERT = InvertedValue.Clockwise_Positive;
 
         return new Swerve_Type_Constants(
                 WHEEL_DIAMETER,
