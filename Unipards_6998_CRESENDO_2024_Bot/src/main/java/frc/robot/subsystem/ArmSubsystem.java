@@ -30,16 +30,12 @@ public class ArmSubsystem extends SubsystemBase {
 
         ARM_MOTOR.setIdleMode(CANSparkBase.IdleMode.kBrake);
 
-        ARM_MOTOR_ENCODER.setPositionConversionFactor(Mechanism_Constants.ARM_CONSTANTS.ARM_GEAR_RATIO);
-        ARM_MOTOR_ENCODER.setVelocityConversionFactor(Mechanism_Constants.ARM_CONSTANTS.ARM_GEAR_RATIO / 60);
+        ARM_MOTOR_ENCODER.setPositionConversionFactor(360 / Mechanism_Constants.ARM_CONSTANTS.ARM_GEAR_RATIO);
+        ARM_MOTOR_ENCODER.setVelocityConversionFactor(360 / (Mechanism_Constants.ARM_CONSTANTS.ARM_GEAR_RATIO / 60));
     }
 
-    public void Set_Arm(double RPM) {
-        ARM_MOTOR.getPIDController().setReference(RPM, CANSparkBase.ControlType.kVelocity);
-    }
-
-    public void Zero_Arm() {
-        ARM_MOTOR.getPIDController().setReference(0, CANSparkBase.ControlType.kVelocity);
+    public void Set_Arm(double degree) {
+        ARM_MOTOR.getPIDController().setReference(degree, CANSparkBase.ControlType.kSmartMotion);
     }
 
 }

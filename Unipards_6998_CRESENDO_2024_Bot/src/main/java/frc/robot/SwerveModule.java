@@ -10,6 +10,8 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.robot.All_Constants.Swerve.Swerve_Motion_Constants;
 import frc.robot.All_Constants.Swerve.Swerve_Type_Constants;
 
@@ -29,7 +31,7 @@ public class SwerveModule{
 
     private final PositionVoltage ANGLE_POSITION = new PositionVoltage(0);
 
-    SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Swerve_Motion_Constants.SWERVE_DRIVE_MOTOR_CONSTANTS.SWERVE_DRIVE_KS, Swerve_Motion_Constants.SWERVE_DRIVE_MOTOR_CONSTANTS.SWERVE_DRIVE_KV, Swerve_Motion_Constants.SWERVE_DRIVE_MOTOR_CONSTANTS.SWERVE_DRIVE_KA);
+    private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Swerve_Motion_Constants.SWERVE_DRIVE_MOTOR_CONSTANTS.SWERVE_DRIVE_KS, Swerve_Motion_Constants.SWERVE_DRIVE_MOTOR_CONSTANTS.SWERVE_DRIVE_KV, Swerve_Motion_Constants.SWERVE_DRIVE_MOTOR_CONSTANTS.SWERVE_DRIVE_KA);
 
     public SwerveModule(int module_num, Swerve_Type_Constants swerveTypeConstants, int D_MOTOR_ID, int A_MOTOR_ID, int CANCODER_ID, Rotation2d ANGLE_OFFSET) {
         this.swerveTypeConstants = swerveTypeConstants;
@@ -50,16 +52,50 @@ public class SwerveModule{
 
     }
 
-    public     
+    public void setDesiredState(SwerveModuleState DESIRED_STATE, boolean IS_OPENLOOP) {
+        DESIRED_STATE = SwerveModuleState.optimize(DESIRED_STATE, getState().angle);
+        setSpeed(DESIRED_STATE, IS_OPENLOOP);
+        setAngle(DESIRED_STATE);
+    }
+    
+    private void setSpeed(SwerveModuleState DESIRED_STATE, boolean IS_OPENLOOP) {
+        if (IS_OPENLOOP) {
+            DRIVE_DUTY_CYCLE.Output = DESIRED_STATE.speedMetersPerSecond / Swerve_Motion_Constants.SWEVE_CHASSIS_CONSTANTS.SWERVE_MAX_SPEED;
+            DRIVE_MOTOR.setControl(DRIVE_DUTY_CYCLE);
+        }
+        else {
+            DRIVE_VELOCITY_VOLTAGE.Velocity = Conversions.MPS_to_FALCON_TICKS(DESIRED_STATE.speedMetersPerSecond, swerveTypeConstants.WHEEL_CIRCUMFERENCE, swerveTypeConstants.DRIVE_GEAR_RATIO);
+            DRIVE_VELOCITY_VOLTAGE.FeedForward = feedforward.calculate(DESIRED_STATE.speedMetersPerSecond);
+            DRIVE_MOTOR.setControl(DRIVE_VELOCITY_VOLTAGE);
+        }
+    }
+
+    private void setAngle(SwerveModuleState DESIRED_STATE) {
+        ANGLE_MOTOR.setControl(ANGLE_POSITION.withPosition(DESIRED_STATE.angle.getDegrees()));
+    }
+
+    public SwerveModulePosition getPosition() {
+        return new SwerveModulePosition(
+                Conversions.FALCON_TICKS_to_METERS(DRIVE_MOTOR.getPosition().getValue(), swerveTypeConstants.WHEEL_CIRCUMFERENCE, swerveTypeConstants.DRIVE_GEAR_RATIO),
+                getAngle()
+        );
+    }
+
+    public SwerveModuleState getState() {
+        return new SwerveModuleState(
+                Conversions.FALCON_TICKS_to_MPS(DRIVE_MOTOR.getPosition().getValue(), swerveTypeConstants.WHEEL_CIRCUMFERENCE, swerveTypeConstants.DRIVE_GEAR_RATIO),
+                getAngle()
+        );
+    }
 
 
-    public Rotation2d Get_Angle() {
+    public Rotation2d getAngle() {
         return Rotation2d.fromDegrees(CANCODER.getPosition().getValue());
     }
 
-    public void reset_to_Absolute_0(CANcoder CANCODER) {
-        ABS_POS = CANCODER.getPosition() -
-
+    public void reset_to_Absolute_0() {
+        double ABSOLUTE_POSITION = (getAngle().getDegrees() - ANGLE_OFFSET.getDegrees());
+        ANGLE_MOTOR.setPosition(ABSOLUTE_POSITION);
     }
 
     private void config_cancoder() {
@@ -81,7 +117,7 @@ public class SwerveModule{
         A_MOTOR_CONFIG.CurrentLimits.SupplyCurrentThreshold = Swerve_Motion_Constants.SWERVE_ANGLE_MOTOR_CONSTANTS.SWERVE_ANGLE_CURRENT_THRESHOLD;
         A_MOTOR_CONFIG.CurrentLimits.SupplyTimeThreshold = Swerve_Motion_Constants.SWERVE_ANGLE_MOTOR_CONSTANTS.SWERVE_ANGLE_CURRENT_THRESHOLD_TIME;
 
-        A_MOTOR_CONFIG.Feedback.SensorToMechanismRatio = swerveTypeConstants.ANGLE_GEAR_RATIO;
+        A_MOTOR_CONFIG.Feedback.SensorToMechanismRatio = (360 / swerveTypeConstants.ANGLE_GEAR_RATIO);
         A_MOTOR_CONFIG.ClosedLoopGeneral.ContinuousWrap = true;
 
         ANGLE_MOTOR.getConfigurator().apply(A_MOTOR_CONFIG);
