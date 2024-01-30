@@ -5,8 +5,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import static frc.robot.All_Constants.Constants.ARM_CURRENT_LIMIT;
-import static frc.robot.All_Constants.Constants.ARM_PID;
+import static frc.robot.All_Constants.Constants.*;
 import static frc.robot.All_Constants.RobotMap.ARM_MOTOR_ID;
 
 public class ArmSubSystem extends SubsystemBase{
@@ -32,10 +31,17 @@ public class ArmSubSystem extends SubsystemBase{
         mArmMotor.setIdleMode(CANSparkBase.IdleMode.kBrake);
 
 
-        mArmMotor.getEncoder().setVelocityConversionFactor(0.1);
-        mArmMotor.getEncoder().setPositionConversionFactor(0.1);
+        armMotorEncoder.setPositionConversionFactor(360/armGearRatio);
+        armMotorEncoder.setVelocityConversionFactor(360/(armGearRatio/60));
 
         mArmMotor.burnFlash();
+    }
+    public void setArm(double degree){
+        mArmMotor.getPIDController().setReference(degree, CANSparkBase.ControlType.kSmartMotion);
+    }
+    public void disableArm(){
+        mArmMotor.set(0);
+        armEnabled = false;
     }
 
 

@@ -15,7 +15,7 @@ public class SwerveSubsystem extends SubsystemBase {
         return INSTANCE;
     }
 
-    private SwerveSubsystem() {
+    public SwerveSubsystem() {
 
     }
 }
