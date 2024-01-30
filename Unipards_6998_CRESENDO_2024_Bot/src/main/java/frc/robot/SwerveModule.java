@@ -57,7 +57,7 @@ public class SwerveModule{
         setSpeed(DESIRED_STATE, IS_OPENLOOP);
         setAngle(DESIRED_STATE);
     }
-    
+
     private void setSpeed(SwerveModuleState DESIRED_STATE, boolean IS_OPENLOOP) {
         if (IS_OPENLOOP) {
             DRIVE_DUTY_CYCLE.Output = DESIRED_STATE.speedMetersPerSecond / Swerve_Motion_Constants.SWEVE_CHASSIS_CONSTANTS.SWERVE_MAX_SPEED;

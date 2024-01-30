@@ -1,7 +1,5 @@
 package frc.robot.All_Constants.Swerve;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public class Swerve_Motion_Constants {
