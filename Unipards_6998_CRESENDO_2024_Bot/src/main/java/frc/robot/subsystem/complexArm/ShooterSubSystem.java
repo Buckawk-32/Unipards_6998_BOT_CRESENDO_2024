@@ -1,4 +1,4 @@
-package frc.robot.subsystem;
+package frc.robot.subsystem.complexArm;
 
 import static frc.robot.All_Constants.Constants.SHOOTER_PID;
 
@@ -8,10 +8,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.All_Constants.RobotMap;
 
 public class ShooterSubSystem extends SubsystemBase {
-    private final CANSparkMax mShooter = new CANSparkMax(RobotMap.SHOOTER_MOTOR_ID, CANSparkMax.MotorType.kBrushless);
+
+    public CANSparkMax mShooter;
+
     private boolean shooterEnabled = false;
     // Neo 550 for Intake, NEO for shooter.
     public ShooterSubSystem() {
+        CANSparkMax mShooter = new CANSparkMax(RobotMap.SHOOTER_MOTOR_ID, CANSparkMax.MotorType.kBrushless);
        
         mShooter.restoreFactoryDefaults();
         mShooter.setInverted(RobotMap.SHOOTER_INVERTED);
@@ -21,8 +24,10 @@ public class ShooterSubSystem extends SubsystemBase {
         mShooter.getPIDController().setI(SHOOTER_PID[1]);
         mShooter.getPIDController().setD(SHOOTER_PID[2]);
         mShooter.getPIDController().setFF(SHOOTER_PID[3]);
+        mShooter.setIdleMode(CANSparkMax.IdleMode.kCoast);
 
-        mShooter.getEncoder().setVelocityConversionFactor(0.1);
+
+        mShooter.getEncoder().setVelocityConversionFactor(360/60);
         mShooter.getEncoder().setPositionConversionFactor(0.1);
 
    

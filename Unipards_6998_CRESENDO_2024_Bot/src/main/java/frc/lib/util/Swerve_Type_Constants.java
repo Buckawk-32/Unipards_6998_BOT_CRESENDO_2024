@@ -1,4 +1,4 @@
-package frc.robot.All_Constants;
+package frc.lib.util;
 
 import edu.wpi.first.math.util.Units;
 
@@ -8,10 +8,8 @@ public class Swerve_Type_Constants {
     public double WHEEL_CIRCUMFERENCE;
     public double ANGLE_GEAR_RATIO;
     public double DRIVE_GEAR_RATIO;
-    public double ANGLE_KP;
-    public double ANGLE_KI;
-    public double ANGLE_KD;
-    public double ANGLE_KF;
+    public double ANGLE_PID[];
+
     public boolean DRIVE_MOTOR_INVERT;
     public boolean ANGLE_MOTOR_INVERT;
     public boolean CANCODER_INVERT;
@@ -21,10 +19,7 @@ public class Swerve_Type_Constants {
             double WHEEL_DIAMETER,
             double ANGLE_GEAR_RATIO,
             double DRIVE_GEAR_RATIO,
-            double ANGLE_KP,
-            double ANGLE_KI,
-            double ANGLE_KD,
-            double ANGLE_KF,
+            double ANGLE_PID[],
             boolean DRIVE_MOTOR_INVERT,
             boolean ANGLE_MOTOR_INVERT,
             boolean CANCODER_INVERT
@@ -33,10 +28,8 @@ public class Swerve_Type_Constants {
         this.WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI;
         this.ANGLE_GEAR_RATIO = ANGLE_GEAR_RATIO;
         this.DRIVE_GEAR_RATIO = DRIVE_GEAR_RATIO;
-        this.ANGLE_KP = ANGLE_KP;
-        this.ANGLE_KI = ANGLE_KI;
-        this.ANGLE_KD = ANGLE_KD;
-        this.ANGLE_KF = ANGLE_KF;
+        this.ANGLE_PID = ANGLE_PID;
+
         this.DRIVE_MOTOR_INVERT = DRIVE_MOTOR_INVERT;
         this.ANGLE_MOTOR_INVERT = ANGLE_MOTOR_INVERT;
         this.CANCODER_INVERT = CANCODER_INVERT;
@@ -49,10 +42,7 @@ public class Swerve_Type_Constants {
         double ANGLE_GEAR_RATIO = SWERVE_MK4I_ANGLE_GEAR_RATIO;
         double DRIVE_GEAR_RATIO = SWERVE_MK4I_DRIVE_GEAR_RATIO_L1;
 
-        double ANGLE_KP = 0.3;
-        double ANGLE_KI = 0.0;
-        double ANGLE_KD = 0.0;
-        double ANGLE_KF = 0.0;
+        double ANGLE_PID[] = {0.0, 0.0, 0.0, 0.0};
 
         boolean DRIVE_MOTOR_INVERT = false;
         boolean ANGLE_MOTOR_INVERT = true;
@@ -62,10 +52,7 @@ public class Swerve_Type_Constants {
                 WHEEL_DIAMETER,
                 ANGLE_GEAR_RATIO,
                 DRIVE_GEAR_RATIO,
-                ANGLE_KP,
-                ANGLE_KI,
-                ANGLE_KD,
-                ANGLE_KF,
+                ANGLE_PID,
                 DRIVE_MOTOR_INVERT,
                 ANGLE_MOTOR_INVERT,
                 CANCODER_MOTOR_INVERT);

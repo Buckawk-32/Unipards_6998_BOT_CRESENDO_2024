@@ -3,7 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystem.CollectSubSystem;
+import frc.robot.subsystem.complexArm.CollectSubSystem;
 
 public class IntakeCommand extends CommandBase {
 
