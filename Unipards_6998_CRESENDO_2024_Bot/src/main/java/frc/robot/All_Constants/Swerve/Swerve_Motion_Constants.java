@@ -1,11 +1,39 @@
 package frc.robot.All_Constants.Swerve;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 
 public class Swerve_Motion_Constants {
-    public static final class SWEVE_CHASSIS_CONSTANTS {
+    public static final class SWERVE_CHASSIS_CONSTANTS {
         public final static double SWERVE_MAX_SPEED = 4.5;
         public final static double SWERVE_MAX_ANGULAR_VELOCITY = 4.5;
+        public final static double SWERVE_CHASSIS_LENGTH_METERS = 0.62865;
+        public final static double SWERVE_CHASSIS_WIDTH_METERS = 0.62865;
+
+        public final static Translation2d SWERVE_FRONT_LEFT_LOCATION = new Translation2d(
+                SWERVE_CHASSIS_LENGTH_METERS / 2, SWERVE_CHASSIS_WIDTH_METERS / 2
+        );
+        public final static Translation2d SWERVE_BACK_LEFT_LOCATION = new Translation2d(
+                -SWERVE_CHASSIS_LENGTH_METERS / 2, SWERVE_CHASSIS_WIDTH_METERS / 2
+        );
+        public final static Translation2d SWERVE_FRONT_RIGHT_LOCATION = new Translation2d(
+                SWERVE_CHASSIS_LENGTH_METERS / 2, -SWERVE_CHASSIS_WIDTH_METERS / 2
+        );
+        public final static Translation2d SWERVE_BACK_RIGHT_LOCATION = new Translation2d(
+                -SWERVE_CHASSIS_LENGTH_METERS / 2, -SWERVE_CHASSIS_WIDTH_METERS / 2
+        );
+
+        public final static SwerveDriveKinematics SWERVE_KINEMATICS = new SwerveDriveKinematics(
+                Swerve_Motion_Constants.SWERVE_CHASSIS_CONSTANTS.SWERVE_FRONT_LEFT_LOCATION,
+                Swerve_Motion_Constants.SWERVE_CHASSIS_CONSTANTS.SWERVE_BACK_LEFT_LOCATION,
+                Swerve_Motion_Constants.SWERVE_CHASSIS_CONSTANTS.SWERVE_FRONT_RIGHT_LOCATION,
+                Swerve_Motion_Constants.SWERVE_CHASSIS_CONSTANTS.SWERVE_BACK_RIGHT_LOCATION
+        );
+
+        public final static boolean NAVX_INVERTED = true;
+
+        public final static double SWERVE_DEADBAND = 0.05;
     }
 
     public static final class SWERVE_DRIVE_MOTOR_CONSTANTS {

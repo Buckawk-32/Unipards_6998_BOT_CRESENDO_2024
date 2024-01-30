@@ -17,7 +17,7 @@ import frc.robot.All_Constants.Swerve.Swerve_Type_Constants;
 
 public class SwerveModule{
 
-    private int module_num;
+    public int module_num;
     private Swerve_Type_Constants swerveTypeConstants;
 
     private TalonFX DRIVE_MOTOR;
@@ -60,7 +60,7 @@ public class SwerveModule{
 
     private void setSpeed(SwerveModuleState DESIRED_STATE, boolean IS_OPENLOOP) {
         if (IS_OPENLOOP) {
-            DRIVE_DUTY_CYCLE.Output = DESIRED_STATE.speedMetersPerSecond / Swerve_Motion_Constants.SWEVE_CHASSIS_CONSTANTS.SWERVE_MAX_SPEED;
+            DRIVE_DUTY_CYCLE.Output = DESIRED_STATE.speedMetersPerSecond / Swerve_Motion_Constants.SWERVE_CHASSIS_CONSTANTS.SWERVE_MAX_SPEED;
             DRIVE_MOTOR.setControl(DRIVE_DUTY_CYCLE);
         }
         else {
@@ -77,24 +77,24 @@ public class SwerveModule{
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(
                 Conversions.FALCON_TICKS_to_METERS(DRIVE_MOTOR.getPosition().getValue(), swerveTypeConstants.WHEEL_CIRCUMFERENCE, swerveTypeConstants.DRIVE_GEAR_RATIO),
-                getAngle()
+                Rotation2d.fromDegrees(ANGLE_MOTOR.getPosition().getValue())
         );
     }
 
     public SwerveModuleState getState() {
         return new SwerveModuleState(
                 Conversions.FALCON_TICKS_to_MPS(DRIVE_MOTOR.getPosition().getValue(), swerveTypeConstants.WHEEL_CIRCUMFERENCE, swerveTypeConstants.DRIVE_GEAR_RATIO),
-                getAngle()
+                Rotation2d.fromDegrees(ANGLE_MOTOR.getPosition().getValue())
         );
     }
 
 
-    public Rotation2d getAngle() {
+    public Rotation2d getCANcoder() {
         return Rotation2d.fromDegrees(CANCODER.getPosition().getValue());
     }
 
     public void reset_to_Absolute_0() {
-        double ABSOLUTE_POSITION = (getAngle().getDegrees() - ANGLE_OFFSET.getDegrees());
+        double ABSOLUTE_POSITION = (getCANcoder().getDegrees() - ANGLE_OFFSET.getDegrees());
         ANGLE_MOTOR.setPosition(ABSOLUTE_POSITION);
     }
 
