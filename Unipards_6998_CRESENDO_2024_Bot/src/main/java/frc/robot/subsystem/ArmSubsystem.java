@@ -1,6 +1,7 @@
 package frc.robot.subsystem;
 
 import com.revrobotics.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.All_Constants.Mechanism.Mechanism_Constants;
 
@@ -36,6 +37,11 @@ public class ArmSubsystem extends SubsystemBase {
 
     public void Set_Arm(double degree) {
         ARM_MOTOR.getPIDController().setReference(degree, CANSparkBase.ControlType.kSmartMotion);
+    }
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Arm angle (degrees)", ARM_MOTOR_ENCODER.getPosition());
     }
 
 }

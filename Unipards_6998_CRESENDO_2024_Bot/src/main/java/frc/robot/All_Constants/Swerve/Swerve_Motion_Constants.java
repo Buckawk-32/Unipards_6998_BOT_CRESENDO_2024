@@ -32,8 +32,8 @@ public class Swerve_Motion_Constants {
         );
 
         public final static boolean NAVX_INVERTED = true;
-
         public final static double SWERVE_DEADBAND = 0.05;
+        public final static double MAX_VOLTAGE = 12.0;
     }
 
     public static final class SWERVE_DRIVE_MOTOR_CONSTANTS {
@@ -45,12 +45,12 @@ public class Swerve_Motion_Constants {
         public final static double SWERVE_DRIVE_MOTOR_OPENLOOPRAMP = 0.25;
         public final static double SWERVE_DRIVE_MOTOR_CLOSELOOPRAMP = 0.0;
 
-        public final static double SWERVE_DRIVE_KP = 0.0;
+        public final static double SWERVE_DRIVE_KP = 0.05;
         public final static double SWERVE_DRIVE_KI = 0.0;
         public final static double SWERVE_DRIVE_KD = 0.0;
-        public final static double SWERVE_DRIVE_KS = 0.0;
-        public final static double SWERVE_DRIVE_KA = 0.0;
-        public final static double SWERVE_DRIVE_KV = 0.0;
+        public final static double SWERVE_DRIVE_KS = (0.32 / SWERVE_CHASSIS_CONSTANTS.MAX_VOLTAGE);
+        public final static double SWERVE_DRIVE_KA = (1.51 / SWERVE_CHASSIS_CONSTANTS.MAX_VOLTAGE);
+        public final static double SWERVE_DRIVE_KV = (0.27 / SWERVE_CHASSIS_CONSTANTS.MAX_VOLTAGE);
     }
 
     public static final class SWERVE_ANGLE_MOTOR_CONSTANTS {

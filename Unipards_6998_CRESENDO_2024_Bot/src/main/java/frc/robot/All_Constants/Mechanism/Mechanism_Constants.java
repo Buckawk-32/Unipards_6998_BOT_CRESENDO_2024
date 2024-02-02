@@ -19,6 +19,8 @@ public class Mechanism_Constants {
         public final static int INTAKE_CURRENT_LIMIT = 35;
 
         public final static double INTAKE_GEAR_RATIO = (30/1);
+
+        public final static double INTAKE_RPM = 300;
     }
 
     public static class SHOOTER_CONSTANTS {
@@ -31,6 +33,8 @@ public class Mechanism_Constants {
 
         public static final int SHOOTER_CURRENT_LIMIT = 35;
         public static final double SHOOTER_GEAR_RATIO = 0.0;
+
+        public static final double SHOOTER_RPM = 800;
     }
 
     public static class ARM_CONSTANTS {

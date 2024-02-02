@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.All_Constants.Mechanism.Mechanism_Constants;
 
+
 public class Shoot_Intake_Subsystem extends SubsystemBase {
 
 
@@ -62,20 +63,28 @@ public class Shoot_Intake_Subsystem extends SubsystemBase {
         SHOOTER_MOTOR.burnFlash();
     }
 
-    public void Set_Intake(double RPM) {
-        INTAKE_MOTOR.getPIDController().setReference(RPM, CANSparkBase.ControlType.kVelocity);
+    public void setIntake() {
+        INTAKE_MOTOR.getPIDController().setReference(Mechanism_Constants.INTAKE_CONSTANTS.INTAKE_RPM, CANSparkBase.ControlType.kVelocity);
     }
 
-    public void Zero_Intake() {
+    public void zeroIntake() {
         INTAKE_MOTOR.getPIDController().setReference(0, CANSparkBase.ControlType.kVelocity);
     }
 
-    public void Set_Shooter(double RPM) {
-        SHOOTER_MOTOR.getPIDController().setReference(RPM, CANSparkBase.ControlType.kVelocity);
+    public void setShooter() {
+        SHOOTER_MOTOR.getPIDController().setReference(Mechanism_Constants.SHOOTER_CONSTANTS.SHOOTER_RPM, CANSparkBase.ControlType.kVelocity);
     }
 
-    public void Zero_Shooter() {
+    public void zeroShooter() {
         SHOOTER_MOTOR.getPIDController().setReference(0, CANSparkBase.ControlType.kVelocity);
+    }
+
+    @Override
+    public void periodic() {
+
+        SmartDashboard.putNumber("Intake RPM", INTAKE_MOTOR_ENCODER.getVelocity());
+        SmartDashboard.putNumber("Shooter RPM", SHOOTER_MOTOR_ENCODER.getVelocity());
+
     }
 
 }
