@@ -5,7 +5,7 @@ import com.revrobotics.CANSparkBase;
 public class Mechanism_Constants {
 
     public static class INTAKE_CONSTANTS {
-        public static final int INTAKE_MOTOR_ID = 4;
+        public static final int INTAKE_MOTOR_ID = 0;
 
         public final static double INTAKE_KP = 0.0;
         public final static double INTAKE_KI = 0.0;
@@ -24,7 +24,7 @@ public class Mechanism_Constants {
     }
 
     public static class SHOOTER_CONSTANTS {
-        public static final int SHOOTER_MOTOR_ID = 3;
+        public static final int SHOOTER_MOTOR_ID = 0;
 
         public static final double SHOOTER_KP = 0.0;
         public static final double SHOOTER_KI = 0.0;
@@ -38,10 +38,10 @@ public class Mechanism_Constants {
     }
 
     public static class ARM_CONSTANTS {
-        public static final int ARM_MOTOR_1_ID = 1;
-        public static final int ARM_MOTOR_2_ID = 2;
+        public static final int ARM_MOTOR_1_ID = 0;
+        public static final int ARM_MOTOR_2_ID = 1;
 
-        public static final double ARM_KP = 0.02;
+        public static final double ARM_KP = 0.0;
         public static final double ARM_KI = 0.0;
         public static final double ARM_KD = 0.0;
         public static final double ARM_KF = 0.0;
@@ -49,9 +49,10 @@ public class Mechanism_Constants {
         public static final int ARM_MOTOR_LIMIT = 35;
         public static final double ARM_GEAR_RATIO = (100/1);
 
-        public static final double INTAKE_ARM_ANGLE = 4.0;
-        public static final double AMP_ARM_ANGLE = 58.0;
-        public static final double SPEAKER_ARM_ANGLE = 42.0;
+        public static final double MINIMUM_ARM_ANGLE = 30.0;
+        public static final double MAXIMUM_ARM_ANGLE = 180.0;
+        public static final double DEFAULT_ARM_ANGLE = 90.0;
+        public static final double AMP_ARM_ANGLE = 180.0;
     }
 
 }
