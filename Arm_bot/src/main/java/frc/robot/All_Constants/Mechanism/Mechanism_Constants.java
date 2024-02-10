@@ -49,10 +49,9 @@ public class Mechanism_Constants {
         public static final int ARM_MOTOR_LIMIT = 35;
         public static final double ARM_GEAR_RATIO = (100/1);
 
-        public static final double MINIMUM_ARM_ANGLE = 30.0;
-        public static final double MAXIMUM_ARM_ANGLE = 180.0;
-        public static final double DEFAULT_ARM_ANGLE = 90.0;
-        public static final double AMP_ARM_ANGLE = 180.0;
+        public static final double INTAKE_ARM_ANGLE = 3.0;
+        public static final double SPEAKER_ARM_ANGLE = 18.0;
+        public static final double AMP_ARM_ANGLE = 58.0;
     }
 
 }

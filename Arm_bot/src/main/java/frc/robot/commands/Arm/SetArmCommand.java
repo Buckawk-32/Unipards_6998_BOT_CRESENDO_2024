@@ -46,7 +46,7 @@ public class SetArmCommand extends Command {
             case 90 -> {
 
                 ARM_SUBSYSTEM.setArm(Mechanism_Constants.ARM_CONSTANTS.AMP_ARM_ANGLE);
-                ARM_DEGREE = Mechanism_Constants.ARM_CONSTANTS.INTAKE_ARM_ANGLE;
+                ARM_DEGREE = Mechanism_Constants.ARM_CONSTANTS.AMP_ARM_ANGLE;
 
             }
         }
